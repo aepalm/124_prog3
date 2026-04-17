@@ -1,5 +1,5 @@
-# Use: python partition.py flag algorithm inputfile
-# Going to have to include a makefile of some kind ??
+# Use: ./partition.py flag algorithm inputfile
+# Going to have to include a makefile
 import sys
 
 
