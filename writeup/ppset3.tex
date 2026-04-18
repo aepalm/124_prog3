@@ -10,6 +10,7 @@
 \setlength{\parindent}{0.3 in}
 \setlength{\parskip}{0.1 in}
 \usepackage{epsf}
+\usepackage{amsmath}
 
 \def\O{\mathop{\smash{O}}\nolimits}
 \def\o{\mathop{\smash{o}}\nolimits}
@@ -32,11 +33,44 @@
 {\bf Give a dynamic programming solution to the Number Partition
 problem.}
 \smallskip 
+We have $A = (a_1, \dots, a_n)$ and the sum $b = \sum_{i=1}^{n} a_i$
+If we choose some subset $A_1$ with subset sum $x$, then the other subset $A_2 = A \setminus A_1$
+must have subset sum $b-x$. These selections would then give us a residue of $|x - (b-x)| = |2x-b|$. Thus we 
+seek to find the subset with subset sum $x$ that minimizes $|2x-b|$.
+Let us define $DP[i][x]$ as follows: 
+\[
+DP[i][x]= 
+\begin{cases} 
+  \text{true} & \text{if using the first i numbers, we can make a subset with sum x} \\
+  \text{false}   & \text{otherwise } 
+\end{cases}
+\]
+Our base cases are $DP[0][0] =$ true, since we can trivially make a subset with 0 elements of $A$ that sums to 0, and
+$DP[0][x]$ for all $x > 0$, since with 0 elements in the subset, we cannot have a nonzero sum. 
+Our reccurence is based on $i$. For a particular $i > 0$, there are two cases that make $x$ an achievable sum. First, if we use $a_i$ 
+in the summation AND $DP[i-1][x-a_i] = $ true. Alternatively, we could not use $a_i$, meaning that $DP[i-1][x]$ must be true.
+Our reccurence can then be written as:
+\[
+DP[i][x] = (DP[i-1][x]) \vee (DP[i-1][x-a_i]) 
+\]
+Using this, we construct our solution by finding the values of $x$ for which $DP[n][x]$ is true. Then, of those possible $x$ values, find the 
+one that minimizes $|2x-b|$. With this specific $x$ value, we can backtrack as follows:
+starting from $i = n$, if $DP[i-1][x] = $ true, set $s_i = +1$, otherwise, set $s_i = -1$, then do the same for $i = i-1$ until $i=1$. 
 
 \smallskip 
 {\bf Explain briefly how the Karmarkar-Karp algorithm can be 
 implemented in $O(n \log n)$ steps, assuming the values in 
 $A$ are small enough that arithmetic operations take one step.}
+Assuming arithmetic operations take constant time, $O(1)$, we can implement KK in $O(n \log n)$ time as follows: 
+\begin{enumerate}
+	\item Build a max-heap from the input array $A$ (which takes $O(n)$ time)
+	\item Repeat the following $n-1$ times:
+	\begin{enumerate}
+		\item Extract the two largest elements $a_i$ and $a_j$ (each taking $O(\log n)$)
+		\item Insert their difference $|a_i - a_j|$ back into the heap (taking $O(\log n)$)
+	\end{enumerate}
+\end{enumerate}
+Each iteration takes $3 \cdot O(\log n)$, giving a total time of $O(n) + (n-1)\cdot 3O(\log n) = O(n \log n)$.
 \smallskip 
 
 \smallskip 
