@@ -3,8 +3,9 @@
 import sys
 import random
 import heapq
+import math
 
-MAX_ITER = 1000
+MAX_ITER = 25000
 
 def KK(A):
     n = len(A)
@@ -91,6 +92,27 @@ def hill_climbing(A):
             S = neighbor
     return S
 
+def simulated_annealing(A):
+    S = random_sol(len(A))
+    S_dprime = S
+    for i in range(MAX_ITER):
+        neighbor = random_move(S)
+        T_iter = (10^10)(0.8)^(i/300)
+        n_res = std_residue(neighbor)
+        s_res = std_residue(S)
+        prob = math.exp(-(n_res - s_res)/T_iter)
+        if n_res < s_res:
+            S = neighbor
+        else: 
+            rand = random.random()
+            if rand < prob:
+                S = neighbor
+        
+        if std_residue(S) < std_residue(S_dprime):
+            S_dprime = S
+    
+    return S_dprime
+
 def prepar_repeated_rand(A):
     #P is an initial prepartitioned random solution
     P = random_prepar_sol(len(A))
@@ -109,6 +131,26 @@ def prepar_hill_climbing(A):
             P = neighbor
     return P
 
+def prepar_simulated_annealing(A):
+    P = random_prepar_sol(len(A))
+    P_dprime = P
+    for i in range(MAX_ITER):
+        neighbor = random_prepar_move(P)
+        T_iter = (10^10)(0.8)^(i/300)
+        n_res = prepar_to_std(neighbor)
+        p_res = prepar_to_std(P)
+        prob = math.exp(-(n_res - p_res)/T_iter)
+        if n_res < p_res:
+            P = neighbor
+        else: 
+            rand = random.random()
+            if rand < prob:
+                P = neighbor
+        
+        if std_residue(P) < std_residue(P_dprime):
+            P_dprime = P
+    
+    return P_dprime
 
 def main():
     # flag will be 0 when autograder runs, but we can do testing with it
@@ -134,32 +176,38 @@ def main():
     #A is now a list of the integers from the input file
 
     if flag == 0: #autograder solutions
-        if(algorithm == 0):
+        if algorithm == 0:
             residue = KK(A)
-        elif(algorithm == 1):
+        elif algorithm == 1:
             #repeated random
             sol = repeated_random(A) 
             residue = std_residue(sol)
-        elif(algorithm == 2):
+        elif algorithm == 2:
             #hill climbing
             sol = hill_climbing(A)
             residue = std_residue(sol)
-        elif(algorithm == 3):
+        elif algorithm == 3:
             #simulated annealing
-            pass 
-        elif(algorithm == 11):
+            sol = simulated_annealing(A)
+            residue = std_residue(sol) 
+        elif algorithm == 11:
             #prepartitioned repeated random
             prepar_sol = prepar_repeated_rand(A)
             residue = prepar_to_std(A, prepar_sol)
-        elif(algorithm == 12):
+        elif algorithm == 12:
             #prepartitioned hill climbing
             prepar_sol = prepar_hill_climbing(A)
             residue = prepar_to_std(A, prepar_sol)
-        elif(algorithm == 13):
+        elif algorithm == 13:
             #prepartitioned simulated annealing
-            pass
-            
-        
+            prepar_sol = prepar_simulated_annealing(A)
+            residue = prepar_to_std(A, prepar_sol)
+        return residue
+    elif flag == 1:
+        '''generate 50 random instances of the problem, and for each one,
+           find the result using the KK algorithm, the repeated rand, hill climb,
+           simulated annealing, using both representations of solutions; 
+           algorithms should use at least 25000 iterations'''
 
 
 if __name__ == "__main__":    
