@@ -10,14 +10,13 @@ MAX_ITER = 25000
 MAX_VAL = 10**12
 
 def KK(A):
-    A_new = A.copy()
-    heapq.heapify_max(A_new)
-    for i in range(n-1):
-        max1 = heapq.heappop_max(A_new)
-        max2 = heapq.heappop_max(A_new)
-        diff = abs(max1 - max2)
-        heapq.heappush_max(A_new, diff)
-    return heapq.heappop_max(A_new) #returns residue
+    A_new = [-x for x in A]
+    heapq.heapify(A_new)
+    while len(A_new) > 1:
+        a = -heapq.heappop(A_new)
+        b = -heapq.heappop(A_new)
+        heapq.heappush(A_new, -(a - b))
+    return -A_new[0]
 
 def random_sol(n): #random standard solution
     S = []
