@@ -13,6 +13,8 @@ INPUT c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT c:/texlive/2026/texmf-dist/tex/generic/epsf/epsf.sty
 INPUT c:/texlive/2026/texmf-dist/tex/generic/epsf/epsf.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/float/float.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/float/float.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsopn.sty
@@ -23,6 +25,8 @@ INPUT c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsgen.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsopn.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty
+INPUT c:/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT c:/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT c:/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT ./ppset3.aux

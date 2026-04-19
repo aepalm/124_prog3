@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1776546101.74573 "c:/Users/Annika Palm/124_prog3/writeup/ppset3.tex" "ppset3.pdf" "ppset3" 1776546102.78399 0
-  "c:/Users/Annika Palm/124_prog3/writeup/ppset3.tex" 1776546100 3592 dd5f4a1eb8ce1de246b79e79c540fc6e ""
+["pdflatex"] 1776631100.72159 "c:/Users/Annika Palm/124_prog3/writeup/ppset3.tex" "ppset3.pdf" "ppset3" 1776631102.31083 0
+  "c:/Users/Annika Palm/124_prog3/writeup/ppset3.tex" 1776631098 7153 68d8e2cd1b4b43d3b173e7cc87ba71c6 ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1774755389 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1774751341 1004 54797486969f23fa377b128694d548df ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1774751341 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -33,13 +33,15 @@
   "c:/texlive/2026/texmf-dist/tex/latex/amsmath/amstext.sty" 1774751346 2444 9983e1d0683f102e3b190c64a49313aa ""
   "c:/texlive/2026/texmf-dist/tex/latex/base/article.cls" 1774757308 20144 b966087dda3b194755eb460d32e2ef75 ""
   "c:/texlive/2026/texmf-dist/tex/latex/base/size11.clo" 1774757308 8464 f339f4d5391fbe0425b2d94c90e6819e ""
+  "c:/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty" 1774754669 52272 63d293bc0d496619edb57585740861a2 ""
+  "c:/texlive/2026/texmf-dist/tex/latex/float/float.sty" 1774755302 6749 16d2656a1984957e674b149555f1ea1d ""
   "c:/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1774757224 30662 bfd6e864f4ffc5018b0e2b6260c3181c ""
   "c:/texlive/2026/texmf-dist/web2c/texmf.cnf" 1774751158 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
   "c:/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1774811543 5619402 045890036aad9b52b154ef5568e59d3a ""
   "c:/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1774811182 3636407 121b448b77239a2ba4e0ed0287d30154 ""
   "c:/texlive/2026/texmf.cnf" 1774810882 713 e69b156964470283e0530f5060668171 ""
-  "ppset3.aux" 1776546102 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "ppset3.tex" 1776546100 3592 dd5f4a1eb8ce1de246b79e79c540fc6e ""
+  "ppset3.aux" 1776631102 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
+  "ppset3.tex" 1776631098 7153 68d8e2cd1b4b43d3b173e7cc87ba71c6 ""
   (generated)
   "ppset3.aux"
   "ppset3.log"

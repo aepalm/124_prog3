@@ -10,7 +10,9 @@
 \setlength{\parindent}{0.3 in}
 \setlength{\parskip}{0.1 in}
 \usepackage{epsf}
+\usepackage{float}
 \usepackage{amsmath}
+\usepackage{enumitem}
 
 \def\O{\mathop{\smash{O}}\nolimits}
 \def\o{\mathop{\smash{o}}\nolimits}
@@ -56,13 +58,12 @@ DP[i][x] = (DP[i-1][x]) \vee (DP[i-1][x-a_i])
 Using this, we construct our solution by finding the values of $x$ for which $DP[n][x]$ is true. Then, of those possible $x$ values, find the 
 one that minimizes $|2x-b|$. With this specific $x$ value, we can backtrack as follows:
 starting from $i = n$, if $DP[i-1][x] = $ true, set $s_i = +1$, otherwise, set $s_i = -1$, then do the same for $i = i-1$ until $i=1$. 
-
 \smallskip 
 {\bf Explain briefly how the Karmarkar-Karp algorithm can be 
 implemented in $O(n \log n)$ steps, assuming the values in 
 $A$ are small enough that arithmetic operations take one step.}
 Assuming arithmetic operations take constant time, $O(1)$, we can implement KK in $O(n \log n)$ time as follows: 
-\begin{enumerate}
+\begin{enumerate}[noitemsep, topsep=0pt]
 	\item Build a max-heap from the input array $A$ (which takes $O(n)$ time)
 	\item Repeat the following $n-1$ times:
 	\begin{enumerate}
@@ -71,11 +72,68 @@ Assuming arithmetic operations take constant time, $O(1)$, we can implement KK i
 	\end{enumerate}
 \end{enumerate}
 Each iteration takes $3 \cdot O(\log n)$, giving a total time of $O(n) + (n-1)\cdot 3O(\log n) = O(n \log n)$.
-\smallskip 
+\smallskip
 
-\smallskip 
-{\bf Give tables and/or graphs clearly demonstrating the results.  Compare the
-results and discuss.  }
+{\bf Give tables and/or graphs clearly demonstrating the results. Compare the results and discuss.  }
+\newline
+\begin{tabular}{rrrrrrrr}
+\hline
+Instance & KK & RepRand & Hill & SimAnn & PreRepRand & PreHill & PreSimAnn \\
+\hline
+1 & 267084 & 243173588 & 237327240 & 182410690 & 246 & 4 & 86 \\
+2 & 308 & 461540678 & 204094838 & 476839944 & 70 & 1566 & 0 \\
+3 & 11764 & 208734014 & 315525682 & 300130802 & 28 & 622 & 92 \\
+4 & 1082659 & 268726199 & 266780633 & 296349827 & 437 & 953 & 133 \\
+5 & 107797 & 26714757 & 193942973 & 202349517 & 155 & 93 & 17 \\
+6 & 131023 & 145071741 & 104695789 & 103906243 & 45 & 1665 & 119 \\
+7 & 528341 & 129133631 & 212019925 & 106071047 & 371 & 1853 & 351 \\
+8 & 387114 & 94386854 & 36820004 & 1076400202 & 76 & 1838 & 38 \\
+9 & 197317 & 172721273 & 96064065 & 490874793 & 271 & 1223 & 155 \\
+10 & 5352 & 350919780 & 545108928 & 22202782 & 90 & 158 & 2 \\
+11 & 541241 & 1155919983 & 1050971991 & 146834131 & 37 & 191 & 279 \\
+12 & 26375 & 240543537 & 10830117 & 798349731 & 243 & 551 & 59 \\
+13 & 642737 & 162915025 & 274182585 & 122431091 & 43 & 431 & 225 \\
+14 & 2510872 & 239168052 & 113028844 & 344588798 & 46 & 196 & 426 \\
+15 & 17847 & 1013837521 & 339997379 & 191522429 & 103 & 1173 & 91 \\
+16 & 141024 & 36473014 & 114276392 & 8231744 & 684 & 520 & 102 \\
+17 & 13129 & 395870043 & 79929983 & 396753003 & 65 & 743 & 485 \\
+18 & 137445 & 244673241 & 300565985 & 234027895 & 29 & 717 & 173 \\
+19 & 369617 & 64071795 & 928848945 & 649155179 & 221 & 39 & 387 \\
+20 & 39805 & 734119555 & 378054833 & 166303095 & 961 & 191 & 145 \\
+21 & 573332 & 393317812 & 34437634 & 91837432 & 8 & 58 & 24 \\
+22 & 507051 & 18175781 & 55129035 & 202804213 & 141 & 827 & 151 \\
+23 & 164776 & 1813164862 & 20849300 & 219937214 & 358 & 842 & 144 \\
+24 & 98679 & 184195347 & 234701611 & 351319523 & 239 & 2579 & 481 \\
+25 & 7032 & 474446 & 315563930 & 10010578 & 336 & 1566 & 88 \\
+26 & 61997 & 29842177 & 20739603 & 71567763 & 91 & 253 & 31 \\
+27 & 38351 & 239891703 & 136711281 & 14531133 & 87 & 719 & 287 \\
+28 & 209748 & 88893068 & 281132432 & 239202994 & 60 & 142 & 362 \\
+29 & 170116 & 471178122 & 85699190 & 213843840 & 160 & 204 & 432 \\
+30 & 487065 & 10358475 & 884051297 & 51925945 & 87 & 113 & 349 \\
+31 & 88300 & 620550328 & 226087616 & 1806533688 & 56 & 1824 & 934 \\
+32 & 138543 & 279975865 & 129845203 & 127755165 & 287 & 1459 & 15 \\
+33 & 173456 & 21100760 & 214925460 & 264293612 & 156 & 34 & 28 \\
+34 & 192053 & 229018875 & 344757577 & 51380701 & 661 & 341 & 713 \\
+35 & 156100 & 398221096 & 60590116 & 48127870 & 142 & 800 & 74 \\
+36 & 1116919 & 191575653 & 41027715 & 55022209 & 141 & 965 & 19 \\
+37 & 54312 & 5124942 & 158641358 & 52320 & 260 & 1452 & 242 \\
+38 & 36229 & 131387155 & 30901263 & 966134677 & 9 & 6349 & 11 \\
+39 & 122953 & 322650129 & 140031387 & 133300187 & 193 & 637 & 121 \\
+40 & 683872 & 225845596 & 658745734 & 502625654 & 16 & 124 & 144 \\
+41 & 14488 & 201437524 & 53668074 & 420951176 & 32 & 1304 & 378 \\
+42 & 46754 & 108271050 & 245932198 & 33208858 & 284 & 222 & 108 \\
+43 & 272323 & 89442387 & 1132569101 & 132361991 & 157 & 3555 & 103 \\
+44 & 147458 & 125382272 & 473258390 & 386299824 & 82 & 5406 & 398 \\
+45 & 389709 & 399216495 & 23785795 & 181828781 & 55 & 283 & 443 \\
+46 & 3383 & 524808119 & 8286799 & 53636887 & 271 & 999 & 195 \\
+47 & 190244 & 6245402 & 49125646 & 156588282 & 14 & 2806 & 266 \\
+48 & 184437 & 104341999 & 1220373275 & 266682477 & 23 & 577 & 193 \\
+49 & 21254 & 30107640 & 388454366 & 35386628 & 80 & 1072 & 22 \\
+50 & 930194 & 212537986 & 104632390 & 319366020 & 218 & 264 & 192 \\
+\hline
+\end{tabular}
+\newline
+DISCUSS HERE
 \smallskip 
 
 {\bf Discuss briefly how you could use the solution from the
