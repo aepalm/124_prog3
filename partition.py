@@ -4,17 +4,20 @@ import sys
 import random
 import heapq
 import math
+n = 100
 
 MAX_ITER = 25000
+MAX_VAL = 10**12
 
 def KK(A):
-    n = len(A)
+    A_new = A.copy()
+    heapq.heapify_max(A_new)
     for i in range(n-1):
-        max1 = heapq.heappop_max(A)
-        max2 = heapq.heappop_max(A)
+        max1 = heapq.heappop_max(A_new)
+        max2 = heapq.heappop_max(A_new)
         diff = abs(max1 - max2)
-        heapq.heappush_max(A, diff)
-    return heapq.heappop_max(A) #returns residue
+        heapq.heappush_max(A_new, diff)
+    return heapq.heappop_max(A_new) #returns residue
 
 def random_sol(n): #random standard solution
     S = []
@@ -32,8 +35,7 @@ def random_prepar_sol(n): #random prepartition solution
 
 def random_move(S):
     #randomly move from S to a neighbor (for standard solution S)
-    N = S
-    n = len(S)
+    N = S.copy()
     i = random.randint(0, n-1)
     j = i
     while j == i:
@@ -48,18 +50,16 @@ def random_move(S):
 
 def random_prepar_move(P):
     #randomly move from P to a neighbor (for prepartitioned solution P)
-    N = P
-    n = len(P)
-    i = random.randint(0, n-1)
-    j = random.randint(0, n-1)
+    N = P.copy()
+    i = random.randint(0, n-1) #indices are 0 to n-1
+    j = random.randint(1, n) #VALUES are 1 to n
     while P[i] == j:
-        j = random.randint(0,n-1)
+        j = random.randint(1, n)
     N[i] = j
     return N
 
 def prepar_to_std(A, P): 
     #given a prepartitioned solution P and the original A, return residue
-    n = len(P)
     A_new = [0 for _ in range(n)]
     for i in range(0, n):
         p_i = P[i]
@@ -72,7 +72,7 @@ def std_residue(S, A):
     residue = 0
     for i in range(len(A)):
         residue += S[i]*A[i]
-    return residue
+    return abs(residue)
 
 def repeated_random(A):
     #S is an initial random solution
@@ -93,16 +93,17 @@ def hill_climbing(A):
 
 def simulated_annealing(A):
     S = random_sol(len(A))
-    S_dprime = S
+    S_dprime = S.copy()
     for i in range(MAX_ITER):
         neighbor = random_move(S)
         T_iter = (10**10)*(0.8)**(i/300)
         n_res = std_residue(neighbor,A)
         s_res = std_residue(S,A)
-        prob = math.exp(-(n_res - s_res)/T_iter)
+        
         if n_res < s_res:
             S = neighbor
         else: 
+            prob = math.exp(-(n_res - s_res)/T_iter)
             rand = random.random()
             if rand < prob:
                 S = neighbor
@@ -132,24 +133,30 @@ def prepar_hill_climbing(A):
 
 def prepar_simulated_annealing(A):
     P = random_prepar_sol(len(A))
-    P_dprime = P
+    P_dprime = P.copy()
     for i in range(MAX_ITER):
         neighbor = random_prepar_move(P)
         T_iter = (10**10)*(0.8)**(i/300)
         n_res = prepar_to_std(A, neighbor)
         p_res = prepar_to_std(A, P)
-        prob = math.exp(-(n_res - p_res)/T_iter)
         if n_res < p_res:
             P = neighbor
         else: 
+            prob = math.exp(-(n_res - p_res)/T_iter)
             rand = random.random()
             if rand < prob:
                 P = neighbor
         
-        if prepar_to_std(A,P) < prepar_to_std(A,P):
+        if prepar_to_std(A,P) < prepar_to_std(A,P_dprime):
             P_dprime = P
     
     return P_dprime
+
+def make_random_A():
+    A = [0 for _ in range(n)]
+    for i in range(n):
+        A[i] = random.randint(1,MAX_VAL)
+    return A
 
 def main():
     # flag will be 0 when autograder runs, but we can do testing with it
@@ -164,7 +171,7 @@ def main():
         11 Prepartitioned Repeated Random
         12 Prepartitioned Hill Climbing
         13 Prepartitioned Simulated Annealing '''
-        algorithm = sys.argv[2]
+        algorithm = int(sys.argv[2])
 
         # inputfile is a list of 100 (unsorted) integers, one per line
         inputfile = sys.argv[3]
@@ -172,8 +179,7 @@ def main():
         with open(inputfile) as file:
             nums = file.readlines()
             for num in nums:
-                A.append(num)
-        heapq.heapify_max(A)
+                A.append(int(num.strip()))
         #A is now a list of the integers from the input file
         if algorithm == 0:
             residue = KK(A)
@@ -201,27 +207,24 @@ def main():
             #prepartitioned simulated annealing
             prepar_sol = prepar_simulated_annealing(A)
             residue = prepar_to_std(A, prepar_sol)
-        return residue
+        print(residue)
     elif flag == 1:
         '''generate 50 random instances of the problem, and for each one,
            find the result using the KK algorithm, the repeated rand, hill climb,
            simulated annealing, using both representations of solutions; 
            algorithms should use at least 25000 iterations'''
+        print(f"{'Instance':<10} {'KK':<10} {'RepRand':<12} {'Hill':<10} {'SimAnn':<10} {'PreRepRand':<12} {'PreHill':<10} {'PreSimAnn':<10}")
         for i in range(50):
-            print("Instance \t KK \t RepRand \t Hill \t SimAnn \t PreRepRand \t PreHill \t PreSimAnn")
-            A = [random.randint(1,(10**12)) for _ in range(100)]
-            heapq.heapify_max(A)
-            copy_A = A.copy()
-            kk_res = KK(copy_A)
+            A = make_random_A()
+            kk_res = KK(A)
             rand = repeated_random(A)
             hill = hill_climbing(A)
             sim = simulated_annealing(A)
             pre_rand = prepar_repeated_rand(A)
             pre_hill = prepar_hill_climbing(A)
             pre_sim = prepar_simulated_annealing(A)
-            print(i, "\t", kk_res, "\t", std_residue(rand,A), "\t", std_residue(hill,A), "\t", std_residue(sim,A), "\t", prepar_to_std(A, pre_rand), "\t", prepar_to_std(A,pre_hill), "\t", prepar_to_std(A,pre_sim))
 
-            
+            print(f"{i:<10} {kk_res:<10} {std_residue(rand,A):<12} {std_residue(hill,A):<10} {std_residue(sim,A):<10} {prepar_to_std(A, pre_rand):<12} {prepar_to_std(A,pre_hill):<10} {prepar_to_std(A,pre_sim):<10}")
 
 
 if __name__ == "__main__":    
