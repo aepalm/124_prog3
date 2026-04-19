@@ -97,7 +97,7 @@ def simulated_annealing(A):
     S_dprime = S
     for i in range(MAX_ITER):
         neighbor = random_move(S)
-        T_iter = (10^10)(0.8)^(i/300)
+        T_iter = (10^10)*(0.8)^(i/300)
         n_res = std_residue(neighbor)
         s_res = std_residue(S)
         prob = math.exp(-(n_res - s_res)/T_iter)
@@ -136,7 +136,7 @@ def prepar_simulated_annealing(A):
     P_dprime = P
     for i in range(MAX_ITER):
         neighbor = random_prepar_move(P)
-        T_iter = (10^10)(0.8)^(i/300)
+        T_iter = (10^10)*(0.8)^(i/300)
         n_res = prepar_to_std(neighbor)
         p_res = prepar_to_std(P)
         prob = math.exp(-(n_res - p_res)/T_iter)
@@ -154,9 +154,10 @@ def prepar_simulated_annealing(A):
 
 def main():
     # flag will be 0 when autograder runs, but we can do testing with it
-    flag = sys.argv[1] 
-    
-    ''' algorithm is a code:
+    flag = int(sys.argv[1])
+
+    if flag == 0: #autograder solutions
+        ''' algorithm is a code:
         0 Karmarkar-Karp
         1 Repeated Random
         2 Hill Climbing
@@ -164,18 +165,16 @@ def main():
         11 Prepartitioned Repeated Random
         12 Prepartitioned Hill Climbing
         13 Prepartitioned Simulated Annealing '''
-    algorithm = sys.argv[2]
+        algorithm = sys.argv[2]
 
-    # inputfile is a list of 100 (unsorted) integers, one per line
-    inputfile = sys.argv[3]
-    A = []
-    with open(inputfile) as file:
-        nums = file.readlines()
-        for num in nums:
-            A.append(num)
-    #A is now a list of the integers from the input file
-
-    if flag == 0: #autograder solutions
+        # inputfile is a list of 100 (unsorted) integers, one per line
+        inputfile = sys.argv[3]
+        A = []
+        with open(inputfile) as file:
+            nums = file.readlines()
+            for num in nums:
+                A.append(num)
+        #A is now a list of the integers from the input file
         if algorithm == 0:
             residue = KK(A)
         elif algorithm == 1:
@@ -208,6 +207,19 @@ def main():
            find the result using the KK algorithm, the repeated rand, hill climb,
            simulated annealing, using both representations of solutions; 
            algorithms should use at least 25000 iterations'''
+        for i in range(50):
+            print("Instance \t KK \t RepRand \t Hill \t SimAnn \t PreRepRand \t PreHill \t PreSimAnn")
+            A = [random.randint(1,(10^12)) for _ in range(100)]
+            kk_res = KK(A)
+            rand = repeated_random(A)
+            hill = hill_climbing(A)
+            sim = simulated_annealing(A)
+            pre_rand = prepar_repeated_rand(A)
+            pre_hill = prepar_hill_climbing(A)
+            pre_sim = prepar_simulated_annealing(A)
+            print(i, "\t", kk_res, "\t", std_residue(rand), "\t", std_residue(hill), "\t", std_residue(sim), "\t", prepar_to_std(pre_rand), "\t", prepar_to_std(pre_hill), "\t", prepar_to_std(pre_sim))
+
+            
 
 
 if __name__ == "__main__":    
