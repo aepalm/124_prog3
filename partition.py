@@ -2,21 +2,69 @@
 # Going to have to include a makefile
 import sys
 import random
-import heapq
 import math
 n = 100
 
 MAX_ITER = 25000
 MAX_VAL = 10**12
 
+class MaxHeap:
+    def __init__(self):
+        self.heap = []
+
+    def insert(self, value):
+        self.heap.append(value)
+        i = len(self.heap) - 1
+
+        # heapify up
+        while i > 0:
+            p = (i - 1) // 2
+            if self.heap[p] >= self.heap[i]:
+                break
+            self.heap[p], self.heap[i] = self.heap[i], self.heap[p]
+            i = p
+
+    def extract_max(self):
+        if not self.heap:
+            raise IndexError("extract_max from empty heap")
+
+        if len(self.heap) == 1:
+            return self.heap.pop()
+
+        max_val = self.heap[0]
+        self.heap[0] = self.heap.pop()
+        i = 0
+        n = len(self.heap)
+
+        # heapify down
+        while True:
+            largest = i
+            left = 2 * i + 1
+            right = 2 * i + 2
+
+            if left < n and self.heap[left] > self.heap[largest]:
+                largest = left
+            if right < n and self.heap[right] > self.heap[largest]:
+                largest = right
+
+            if largest == i:
+                break
+
+            self.heap[i], self.heap[largest] = self.heap[largest], self.heap[i]
+            i = largest
+
+        return max_val
+    
+
 def KK(A):
-    A_new = [-x for x in A]
-    heapq.heapify(A_new)
-    while len(A_new) > 1:
-        a = -heapq.heappop(A_new)
-        b = -heapq.heappop(A_new)
-        heapq.heappush(A_new, -(a - b))
-    return -A_new[0]
+    A_new = MaxHeap()
+    for val in A:
+        A_new.insert(val)
+    while len(A_new.heap) > 1:
+        a = A_new.extract_max()
+        b = A_new.extract_max()
+        A_new.insert(a - b)
+    return A_new.extract_max()
 
 def random_sol(n): #random standard solution
     S = []
