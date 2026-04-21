@@ -180,34 +180,42 @@ def prepar_repeated_rand(A):
     return P
 
 def prepar_hill_climbing(A):
-    #P is an initial prepartitioned random solution
     P = random_prepar_sol(len(A))
-    for i in range(MAX_ITER):
+    curr_res = prepar_to_std(A, P)
+
+    for _ in range(MAX_ITER):
         neighbor = random_prepar_move(P)
-        if prepar_to_std(A, neighbor) < prepar_to_std(A, P):
+        neigh_res = prepar_to_std(A, neighbor)
+        if neigh_res < curr_res:
             P = neighbor
+            curr_res = neigh_res
     return P
 
 def prepar_simulated_annealing(A):
     P = random_prepar_sol(len(A))
-    P_dprime = P.copy()
+    curr_res = prepar_to_std(A, P)
+    P_best = P.copy()
+    best_res = curr_res
+
     for i in range(MAX_ITER):
         neighbor = random_prepar_move(P)
-        T_iter = (10**10)*(0.8)**(i/300)
-        n_res = prepar_to_std(A, neighbor)
-        p_res = prepar_to_std(A, P)
-        if n_res < p_res:
+        neigh_res = prepar_to_std(A, neighbor)
+        T_iter = (10**10) * (0.8)**(i / 300)
+
+        if neigh_res < curr_res:
             P = neighbor
-        else: 
-            prob = math.exp(-(n_res - p_res)/T_iter)
-            rand = random.random()
-            if rand < prob:
+            curr_res = neigh_res
+        else:
+            prob = math.exp(-(neigh_res - curr_res) / T_iter)
+            if random.random() < prob:
                 P = neighbor
-        
-        if prepar_to_std(A,P) < prepar_to_std(A,P_dprime):
-            P_dprime = P
-    
-    return P_dprime
+                curr_res = neigh_res
+
+        if curr_res < best_res:
+            P_best = P.copy()
+            best_res = curr_res
+
+    return P_best
 
 def make_random_A():
     A = [0 for _ in range(n)]
