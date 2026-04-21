@@ -1,5 +1,4 @@
-# Use: ./partition.py flag algorithm inputfile
-# Going to have to include a makefile
+# Use: python partition.py flag algorithm inputfile
 import sys
 import random
 import math
