@@ -7,59 +7,69 @@ n = 100
 
 MAX_ITER = 25000
 MAX_VAL = 10**12
-
 class MaxHeap:
-    def __init__(self):
-        self.heap = []
+    def __init__(self, arr=None):
+        self.heap = arr[:] if arr else []
+        if self.heap:
+            self.build_heap()
+
+    def build_heap(self):
+        n = len(self.heap)
+        for i in range((n // 2) - 1, -1, -1):
+            self._sift_down(i)
 
     def insert(self, value):
-        self.heap.append(value)
-        i = len(self.heap) - 1
+        heap = self.heap
+        heap.append(value)
+        i = len(heap) - 1
 
-        # heapify up
         while i > 0:
             p = (i - 1) // 2
-            if self.heap[p] >= self.heap[i]:
+            if heap[p] >= heap[i]:
                 break
-            self.heap[p], self.heap[i] = self.heap[i], self.heap[p]
+            heap[p], heap[i] = heap[i], heap[p]
             i = p
 
     def extract_max(self):
-        if not self.heap:
+        heap = self.heap
+        if not heap:
             raise IndexError("extract_max from empty heap")
 
-        if len(self.heap) == 1:
-            return self.heap.pop()
+        if len(heap) == 1:
+            return heap.pop()
 
-        max_val = self.heap[0]
-        self.heap[0] = self.heap.pop()
-        i = 0
-        n = len(self.heap)
+        max_val = heap[0]
+        heap[0] = heap.pop()
+        self._sift_down(0)
+        return max_val
 
-        # heapify down
+    def _sift_down(self, i):
+        heap = self.heap
+        n = len(heap)
+
         while True:
-            largest = i
             left = 2 * i + 1
             right = 2 * i + 2
+            largest = i
 
-            if left < n and self.heap[left] > self.heap[largest]:
+            if left < n and heap[left] > heap[largest]:
                 largest = left
-            if right < n and self.heap[right] > self.heap[largest]:
+            if right < n and heap[right] > heap[largest]:
                 largest = right
 
             if largest == i:
                 break
 
-            self.heap[i], self.heap[largest] = self.heap[largest], self.heap[i]
+            heap[i], heap[largest] = heap[largest], heap[i]
             i = largest
 
-        return max_val
+    def __len__(self):
+        return len(self.heap)
     
 
+
 def KK(A):
-    A_new = MaxHeap()
-    for val in A:
-        A_new.insert(val)
+    A_new = MaxHeap(A)
     while len(A_new.heap) > 1:
         a = A_new.extract_max()
         b = A_new.extract_max()
