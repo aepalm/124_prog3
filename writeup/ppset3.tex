@@ -9,10 +9,8 @@
 \setlength{\headsep}{0.75 in}
 \setlength{\parindent}{0.3 in}
 \setlength{\parskip}{0.1 in}
-\usepackage{epsf}
 \usepackage{float}
 \usepackage{amsmath}
-\usepackage{enumitem}
 
 \def\O{\mathop{\smash{O}}\nolimits}
 \def\o{\mathop{\smash{o}}\nolimits}
@@ -28,13 +26,12 @@
 		
 	\textbf{Collaborators:} None
 
-	\textbf{No. of late days used on previous psets: } 8 (Annika) x (Michelle) \\ \indent
-	\textbf{No. of late days used after including this pset: } 8 (Annika) x (Michelle)
+	\textbf{No. of late days used on previous psets: } 8 (Annika) x 11 (Michelle) \\ \indent
+	\textbf{No. of late days used after including this pset: } 8 (Annika) x 11(Michelle)
 
-\smallskip 
+\section{DP}
 {\bf Give a dynamic programming solution to the Number Partition
-problem.}
-\smallskip 
+problem.} \\
 We have $A = (a_1, \dots, a_n)$ and the sum $b = \sum_{i=1}^{n} a_i$
 If we choose some subset $A_1$ with subset sum $x$, then the other subset $A_2 = A \setminus A_1$
 must have subset sum $b-x$. These selections would then give us a residue of $|x - (b-x)| = |2x-b|$. Thus we 
@@ -59,11 +56,16 @@ Using this, we construct our solution by finding the values of $x$ for which $DP
 one that minimizes $|2x-b|$. With this specific $x$ value, we can backtrack as follows:
 starting from $i = n$, if $DP[i-1][x] = $ true, set $s_i = +1$, otherwise, set $s_i = -1$, then do the same for $i = i-1$ until $i=1$. 
 \smallskip 
+
+
+
+\section{$O(n \log n)$ KK Implementation}
 {\bf Explain briefly how the Karmarkar-Karp algorithm can be 
 implemented in $O(n \log n)$ steps, assuming the values in 
-$A$ are small enough that arithmetic operations take one step.}
+$A$ are small enough that arithmetic operations take one step.} \\
 Assuming arithmetic operations take constant time, $O(1)$, we can implement KK in $O(n \log n)$ time as follows: 
-\begin{enumerate}[noitemsep, topsep=0pt]
+\begin{enumerate}
+	\setlength{\itemsep}{0pt}\setlength{\topsep}{0pt}
 	\item Build a max-heap from the input array $A$ (which takes $O(n)$ time)
 	\item Repeat the following $n-1$ times:
 	\begin{enumerate}
@@ -72,10 +74,10 @@ Assuming arithmetic operations take constant time, $O(1)$, we can implement KK i
 	\end{enumerate}
 \end{enumerate}
 Each iteration takes $3 \cdot O(\log n)$, giving a total time of $O(n) + (n-1)\cdot 3O(\log n) = O(n \log n)$.
-\smallskip
 
-{\bf Give tables and/or graphs clearly demonstrating the results. Compare the results and discuss.  }
-\newline
+
+
+\section{Discussion}
 \begin{tabular}{rrrrrrrr}
 \hline
 Instance & KK & RepRand & Hill & SimAnn & PreRepRand & PreHill & PreSimAnn \\
@@ -131,15 +133,62 @@ Instance & KK & RepRand & Hill & SimAnn & PreRepRand & PreHill & PreSimAnn \\
 49 & 21254 & 30107640 & 388454366 & 35386628 & 80 & 1072 & 22 \\
 50 & 930194 & 212537986 & 104632390 & 319366020 & 218 & 264 & 192 \\
 \hline
-\end{tabular}
-\newline
-DISCUSS HERE
-\smallskip 
+\end{tabular} \\
+{\bf Give tables and/or graphs clearly demonstrating the results. Compare the results and discuss.  }
 
+
+All six heuristic algorithms ran for 25{,}000 iterations on each of the 50 random instances. We can observe the following results from the table above.
+
+\begin{enumerate}
+    \item \textbf{Karmarkar-Karp (KK):} \\
+    KK produces residues consistently in the thousands to low millions across all 50 instances. This is because KK is a greedy differencing algorithm that runs in $O(n \log n)$ time using a max-heap: it repeatedly extracts the two largest elements, replaces them with their difference, and reinserts it. It gets one deterministic shot at a solution with no iteration. Despite this, KK consistently outperforms all three standard-representation heuristics, which is a strong result for a single-pass algorithm.
+
+    \item \textbf{Repeated Random (RepRand):} \\
+    From the table, we can see that RepRand produces residues in the tens to hundreds of millions, often worse than a single random partition. This is because each of the 25{,}000 iterations generates a completely fresh random sign vector independently. Since the expected residue of a uniformly random sign assignment is on the order of $\sqrt{n} \cdot a_{\max} \approx 10^{13}$, the algorithm is sampling from a very large and mostly bad state space of size $2^n$, and 25{,}000 samples is nowhere near enough to consistently find a good solution.
+
+    \item \textbf{Hill Climbing (Hill):} \\
+    Hill climbing also produces residues in the tens of millions to over a billion. This is because hill climbing can only move to strictly better neighbors and therefore gets stuck in local optima very quickly. Since a random move on the standard representation only flips one or two signs, the neighborhood of any given solution is large and mostly flat, and the algorithm has no mechanism to escape once it reaches a local minimum. As we can see from the table, hill climbing is the most inconsistent of the three standard algorithms, occasionally achieving very low residues (e.g., instance 12: residue 10{,}830{,}117) but also producing some of the worst results overall (e.g., instance 35: residue 1{,}981{,}070{,}079).
+
+    \item \textbf{Simulated Annealing (SimAnn):} \\
+    Simulated annealing also falls in the tens of millions to over a billion range, similar to the other standard heuristics. It uses the cooling schedule $T(\text{iter}) = 10^{10} \cdot (0.8)^{\lfloor \text{iter}/300 \rfloor}$ to occasionally accept worse solutions with probability $\exp(-\Delta/T)$, which allows it to escape local optima early in the run. This occasionally helps (e.g., instance 37: residue 52{,}320), but the standard representation's state space is so large and poorly structured that even the ability to escape local optima is not enough to find a meaningfully better solution consistently.
+
+    \item \textbf{Prepartitioned algorithms (PreRepRand, PreHill, PreSimAnn):} \\
+    All three prepartitioned algorithms produce residues in the single digits to low thousands, a reduction of roughly four to five orders of magnitude compared to the standard algorithms. For example, instances 2, 10, and 23 yield PreSimAnn residues of 0, 2, and 1 respectively, while the corresponding standard algorithms return hundreds of millions on the same inputs. This is because the prepartitioned representation fundamentally changes what it means to evaluate a solution: every residue evaluation runs KK on the collapsed array $A'$, so every candidate solution already benefits from KK's greedy differencing. Even a random prepartition tends to yield a low residue, and the search algorithms are then finding the best input to hand to KK rather than searching for a good sign vector directly. Among the three, no single algorithm dominates: PreSimAnn tends to perform best due to its ability to escape local optima (e.g., instance 2: residue 0, instance 10: residue 2), but PreHill occasionally wins (e.g., instance 1: residue 4 vs.\ PreSimAnn's 86), and PreRepRand is competitive despite its simplicity. All three consistently outperform KK by orders of magnitude.
+\end{enumerate}
+
+The most important takeaway from these results is that the choice of representation matters far more than the choice of algorithm. All three standard algorithms perform worse than the single-pass KK, while all three prepartitioned algorithms dramatically outperform KK. The prepartitioned algorithms each require an internal KK call per iteration, costing $O(n \log n)$ per evaluation rather than $O(n)$ for the standard algorithms, so they take noticeably longer wall-clock time. Even so, all algorithms completed well within a few minutes per instance, and the quality improvement from the prepartitioned representation far outweighs the additional runtime cost.
+
+\smallskip
+
+\section{KK as a Starting Point}
 {\bf Discuss briefly how you could use the solution from the
 Karmarkar-Karp algorithm as a starting point for the randomized
 algorithms, and suggest what effect that might have. 
 (No experiments are necessary.)}
+
+To use KK as a starting point, we first recover a sign vector $S^*$ by two-coloring KK's differencing tree (assigning opposite colors to the two elements at each differencing step), which yields a sign assignment achieving the KK residue. For the prepartitioned representation, $S^*$ can be translated into an initial prepartition by setting $p_i = 1$ for all $s_i^* = +1$ and $p_i = 2$ for all $s_i^* = -1$, which recovers exactly the KK residue when evaluated. In either case, using KK as the starting point adds only one $O(n \log n)$ call before 25{,}000 iterations, so the effect on runtime is negligible.
+
+We can consider the effect on each of the six algorithms separately.
+
+\begin{enumerate}
+    \item \textbf{Repeated Random (Standard):} \\
+    There is no benefit. This is because each of the 25{,}000 iterations generates a completely fresh random sign vector from scratch and compares it to the current best. The starting solution is only used in the very first comparison, after which it may immediately be replaced. Since the algorithm never uses the starting point as a base to build from, initializing from KK's solution rather than a random solution has no meaningful effect on the final result.
+
+    \item \textbf{Hill Climbing (Standard):} \\
+    The benefit could be significant, and this is where initializing from KK would matter most. This is because hill climbing can only accept moves that strictly improve the residue and has no mechanism to escape local optima. The quality of the final solution is therefore entirely determined by which local optimum the search falls into, which depends directly on the starting point. Beginning from KK's solution, which is already in the thousands to low millions, places the search in a much better region of the state space than a random starting point and is likely to yield a better local optimum. Since hill climbing is the most starting-point-sensitive of the six algorithms and currently the worst performer among the standard algorithms, this is where we would expect the most meaningful improvement.
+
+    \item \textbf{Simulated Annealing (Standard):} \\
+    The benefit would be moderate. This is because the high temperature early in the cooling schedule $T(\text{iter}) = 10^{10} \cdot (0.8)^{\lfloor \text{iter}/300 \rfloor}$ already allows simulated annealing to accept worse solutions and escape bad starting points, so a good initial solution matters less here than for hill climbing. However, the ``best seen'' tracker $S''$ immediately inherits the KK residue as a floor from the very first iteration, so the returned result would be guaranteed to be at worst equal to KK's regardless of how the search proceeds.
+
+    \item \textbf{Prepartitioned Repeated Random:} \\
+    As with the standard version, there is no benefit. Each iteration generates a completely fresh random prepartition independently, so the starting prepartition is never built upon and plays no role in the final result.
+
+    \item \textbf{Prepartitioned Hill Climbing:} \\
+    The benefit would be minimal in practice. This is because, although prepartitioned hill climbing is sensitive to its starting point for the same reason as the standard version, the prepartitioned algorithms already routinely find residues in the single digits to low thousands, far below KK's residues in the thousands to millions. Initializing from a KK-derived prepartition would give a worse starting residue than what the algorithm typically finds on its own, so it provides little to no practical improvement over a random start.
+
+    \item \textbf{Prepartitioned Simulated Annealing:} \\
+    The same reasoning applies. Prepartitioned simulated annealing already produces results well below KK's residue, so the KK-derived starting point would in many cases be worse than what the algorithm finds within its first few iterations anyway. The ``best seen'' tracker $P_{\text{best}}$ would inherit the KK residue as a floor, but since the algorithm quickly surpasses KK's quality, this provides no practical advantage.
+\end{enumerate}
 
 \end{document}
 

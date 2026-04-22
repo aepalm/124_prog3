@@ -1,15 +1,14 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.29)  19 APR 2026 16:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.16)  22 APR 2026 16:29
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/Annika Palm/124_prog3/writeup/ppset3.tex"
-(c:/Users/Annika Palm/124_prog3/writeup/ppset3.tex
+**ppset3.tex
+(./ppset3.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
-(c:/texlive/2026/texmf-dist/tex/latex/base/article.cls
+(/Users/michelleweon/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
-(c:/texlive/2026/texmf-dist/tex/latex/base/size11.clo
+(/Users/michelleweon/Library/TinyTeX/texmf-dist/tex/latex/base/size11.clo
 File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count275
@@ -23,39 +22,28 @@ File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
-) (c:/texlive/2026/texmf-dist/tex/generic/epsf/epsf.sty
-This is `epsf.tex' v2.7.4 <14 February 2011>
-\epsffilein=\read2
-\epsfframemargin=\dimen149
-\epsfframethickness=\dimen150
-\epsfrsize=\dimen151
-\epsftmp=\dimen152
-\epsftsize=\dimen153
-\epsfxsize=\dimen154
-\epsfysize=\dimen155
-\pspoints=\dimen156
-) (c:/texlive/2026/texmf-dist/tex/latex/float/float.sty
+) (/Users/michelleweon/Library/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count283
 \float@exts=\toks17
 \float@box=\box53
 \@float@everytoks=\toks18
 \@floatcapt=\box54
-) (c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty
+) (/Users/michelleweon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip51
 
 For additional information on amsmath, use the `?' option.
-(c:/texlive/2026/texmf-dist/tex/latex/amsmath/amstext.sty
+(/Users/michelleweon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
- (c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsgen.sty
+ (/Users/michelleweon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks19
-\ex@=\dimen157
-)) (c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty
+\ex@=\dimen149
+)) (/Users/michelleweon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen158
-) (c:/texlive/2026/texmf-dist/tex/latex/amsmath/amsopn.sty
+\pmbraise@=\dimen150
+) (/Users/michelleweon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count284
@@ -75,7 +63,7 @@ LaTeX Info: Redefining \big on input line 721.
 LaTeX Info: Redefining \Big on input line 722.
 LaTeX Info: Redefining \bigg on input line 723.
 LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen159
+\big@size=\dimen151
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
 \macc@depth=\count289
@@ -93,71 +81,62 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \column@=\count294
 \maxfields@=\count295
 \andhelp@=\toks21
-\eqnshift@=\dimen160
-\alignsep@=\dimen161
-\tagshift@=\dimen162
-\tagwidth@=\dimen163
-\totwidth@=\dimen164
-\lineht@=\dimen165
+\eqnshift@=\dimen152
+\alignsep@=\dimen153
+\tagshift@=\dimen154
+\tagwidth@=\dimen155
+\totwidth@=\dimen156
+\lineht@=\dimen157
 \@envbody=\toks22
 \multlinegap=\skip52
 \multlinetaggap=\skip53
 \mathdisplay@stack=\toks23
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
-) (c:/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty
-Package: enumitem 2025/02/06 v3.11 Customized lists
-\enitkv@toks@=\toks24
-\labelindent=\skip54
-\enit@outerparindent=\dimen166
-\enit@toks=\toks25
-\enit@inbox=\box57
-\enit@count@id=\count296
-\enitdp@description=\count297
-) (c:/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+) (/Users/michelleweon/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count298
+\l__color_backend_stack_int=\count296
 ) (./ppset3.aux)
 \openout1 = `ppset3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
  [1
 
-{c:/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \vbox (38.86952pt too high) has occurred while \output is active []
+{/Users/michelleweon/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \vbox (68.94048pt too high) has occurred while \output is active []
 
- [2] [3] (./ppset3.aux)
+ [2] [3] [4] [5] (./ppset3.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 1658 strings out of 467525
- 25528 string characters out of 5423209
- 464759 words of memory out of 5000000
- 30609 multiletter control sequences out of 15000+600000
- 632047 words of font info for 55 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 56i,9n,65p,264b,242s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on ppset3.pdf (3 pages, 102677 bytes).
+ 1248 strings out of 469514
+ 18984 string characters out of 5468470
+ 465756 words of memory out of 5000000
+ 29950 multiletter control sequences out of 15000+600000
+ 633113 words of font info for 59 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 56i,9n,65p,1189b,213s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/michelleweon/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on ppset3.pdf (5 pages, 143731 bytes).
 PDF statistics:
- 54 PDF objects out of 1000 (max. 8388607)
- 32 compressed objects within 1 object stream
+ 75 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
